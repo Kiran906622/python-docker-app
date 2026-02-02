@@ -44,7 +44,7 @@ pipeline {
 
     post {
         success {
-            echo '✅ Deployment Successful!'
+            echo '✅ Deployment Su  ccessful!'
         }
         failure {
             echo '❌ Deployment Failed!'
