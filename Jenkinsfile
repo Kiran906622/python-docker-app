@@ -36,18 +36,23 @@ pipeline {
                         git clone -b ${GIT_BRANCH} ${GIT_REPO} ${APP_DIR}
                         
                         cd ${APP_DIR}
+                        echo "4. Pulling requirements.txt from S3..."
+                        aws s3 cp s3://kiran-devops-requirements-2026/requirements.txt .
+
+                        echo "5. Installing dependencies..."
+                        pip3 install -r requirements.txt || true
                         
-                        echo "4. Removing old Docker container if exists..."
+                        echo "6. Removing old Docker container if exists..."
                         sudo docker stop myapp || true
                         sudo docker rm myapp || true
                         
-                        echo "5. Building new Docker image..."
+                        echo "7. Building new Docker image..."
                         sudo docker build -t ${DOCKER_IMAGE} .
                         
-                        echo "6. Starting new container on port 5000..."
+                        echo "8. Starting new container on port 5000..."
                         sudo docker run -d -p 5000:5000 --name myapp ${DOCKER_IMAGE}
                         
-                        echo "7. Verifying container status..."
+                        echo "9. Verifying container status..."
                         sudo docker ps | grep myapp
                     '
                     """
