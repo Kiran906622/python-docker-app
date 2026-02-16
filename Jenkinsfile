@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        APP_EC2 = '13.201.227.106'         // Your RHEL App Server IP
+        APP_EC2 = '13.127.4.77'         // Your RHEL App Server IP
         SSH_CREDENTIALS = 'app-server-ssh' // Your Jenkins Credential ID
         APP_DIR = '/home/ec2-user/myapp'    // RHEL home directory
         DOCKER_IMAGE = 'myapp:latest'
